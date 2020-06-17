@@ -1,0 +1,581 @@
+/* Global -----------------------------------------------------------------------------*/
+:root {
+    --baseFontSize: 16px;
+    --fontFamily: 'Ibarra Real Nova', serif;
+    --brandColor: #f0f0f0;
+}
+
+* {
+    font-family: var(--fontFamily);
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: var(--baseFontSize);
+    color: var(--brandColor);
+}
+
+body {
+    position: relative;
+
+    &::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--brandColor);
+        z-index: 9999;
+        pointer-events: none;
+        opacity: 0;
+        -webkit-transition: opacity .8s ease;
+        transition: opacity .8s ease;
+    }
+}
+
+body.page-transition::after {
+    opacity: 1;
+}
+
+h1 {
+    font-size: 250px;
+}
+
+h2 {
+    font-size: 40px;
+}
+
+p {
+    font-size: var(--baseFontSize);
+}
+
+a {
+    text-decoration: none;
+}
+
+.btn-shine {
+    padding: 10px 25px;
+    color: rgba(240, 240, 240, .6);
+    background: transparent;
+    border: 1px solid var(--brandColor);
+    outline: 1px solid;
+    outline-color: rgba(240, 240, 240, .6);
+    outline-offset: 0px;
+    transition: all 1.2s cubic-bezier(0.2, 1, 0.2, 1);
+    cursor: pointer;
+    text-transform: uppercase;
+
+    &:hover {
+        border-color: var(--brandColor);
+        box-shadow: inset 0 0 20px rgba(240, 240, 240, .8), 0 0 20px rgba(240, 240, 240, .3);
+        outline-color: transparent;
+        outline-offset: 12px;
+        text-shadow: 2px 2px 3px #000; 
+    }
+}
+
+/* Footer -----------------------------------------------------------------------------*/
+#fixed-footer {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    bottom: 15px;
+    color: rgba(240, 240, 240, .6);
+}
+
+/* Global Nav -----------------------------------------------------------------------------*/
+/* Hamburger Button */
+.hamburger {
+    height: 20px;
+    width: 30px;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    z-index: 99;
+    cursor: pointer;
+
+    .hamburger_line {
+        width: 100%;
+        height: 2px;
+        background-color: var(--brandColor);
+        position: absolute;
+        transition: transform .3s;
+        display: block;
+    }
+
+    .line1.active {
+        top: 8px;
+        transform: rotate(45deg);
+    }
+
+    .line2 {
+        top: 9px;
+
+
+        &.active {
+            transform:scaleX(0);
+        }
+    }
+
+    .line3 {
+        bottom: 0;
+
+        &.active {
+            bottom: 10px;
+            transform: rotate(135deg);
+        }
+    }
+}
+
+/* Hamburger in About, Gallery Pages */
+#fixed-header {
+    .hamburger {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+}
+
+/* Full-screen Nav */
+.gnav {
+    background: #000;
+    display: none;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    z-index: 98;
+
+    .gnav_wrap {
+        align-items: center;
+        display: flex;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+
+        .gnav_menu {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 170px;
+
+            .gnav_menu_item {
+                margin: 40px 0;
+                list-style: none;
+                opacity: 0;
+                cursor: pointer;
+                transition: ease-in .3s;
+                position: relative;
+                
+                a {
+                    color: var(--brandColor);
+                    font-weight: bold;
+                    transition: .5s;
+                    position: relative;
+                    font-size: 40px;
+                }
+
+                #present {
+                    color: rgb(85, 84, 84);
+                    border-bottom: 1px solid rgb(85, 84, 84);
+                }
+
+                .hov_bg {
+                    position: relative;
+                    display: none;
+                    z-index: 0;
+                }
+
+                .ig {
+                    width: 30px;
+                    height: 30px;
+                    background: url('../assets/instagram_w.png') no-repeat;
+                    background-size: cover;
+
+                    &:hover {
+                        opacity: .7;
+                        transition: ease-out .3s;
+                    }
+                }
+    
+                .fb {
+                    height: 30px;
+                    width: 20px;
+                    float: right;
+                    background: url('../assets/facebook_w.png') no-repeat;
+                    background-size: cover;
+                    position: absolute;
+                    top: -30px;
+                    left: 50px;
+
+                    &:hover {
+                        opacity: .7;
+                        transition: ease-out .3s;
+                    }
+                }
+            }
+    
+            .gnav_menu_item:first-of-type {
+                margin-top: 0;
+            }
+
+            .gnav_menu_item:last-of-type {
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+
+div.gnav_fade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    z-index: -1;
+    opacity: 0;
+}
+
+/* Header -----------------------------------------------------------------------------*/
+// Home
+#fixed-header {
+    height: 10vh;
+    width: 100%;
+    background-color: #000;
+    position: fixed;
+    top: 0;
+    z-index: 999;
+}
+
+// The other Pages
+#contact {
+    #fixed-header {
+        background-color: transparent;
+    }
+}
+
+#fixed-header {
+    p {
+        position: absolute;
+        left: 20px;
+        line-height: 10vh;
+    }
+}
+
+/* Home -----------------------------------------------------------------------------*/
+#hero {
+    position: relative;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background: url('../assets/maori.jpg') no-repeat;
+
+
+    &::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        content: '';
+        background: rgba(0, 0, 0, .5);
+    }
+
+    span {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 0;
+
+        &:before {
+            content: "Photography";
+            position: absolute;
+            top: 50%;
+            right: -290px;
+            transform: translateY(-50%);
+            z-index: -1;
+            font-size: 40px;
+            font-weight: bold;
+            letter-spacing: 0.03em;
+        }
+    }
+
+    h1 {
+        background-size: cover;
+        background-position: center;
+        background: url('../assets/maori.jpg') no-repeat;
+        -webkit-background-clip: text;
+        color: transparent;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+
+        &:before {
+            content: "Brendan";
+            position: absolute;
+            color: var(--brandColor);
+            top: 50%;
+            left: -100px;
+            transform: translateY(-50%);
+            z-index: -1;
+            font-size: 40px;
+            letter-spacing: 0.03em;
+        }
+    }
+}
+
+/* BIO -----------------------------------------------------------------------------*/
+#bio_contentsWrap {
+    height: 100vh;
+    width: 100vw;
+    background-color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bio_body {
+    width: 40%;
+    height: 80%;
+    overflow: hidden;
+    position: relative;
+}
+
+    .bio_body:first-of-type {
+        background: url('../assets/alt_img.png') no-repeat;
+        background-size: cover;
+        background-position: center;
+    }
+
+    .bio_body:last-of-type {
+        padding: 0 20px;
+    }
+
+    .bio_body > h2 {
+        margin-bottom: 30px;
+    }
+
+    .bio_body > p {
+        text-align: justify;
+    }
+    
+    .bio_body > .btn-shine {
+        margin: 30px 0 60px 0;
+        display: inline-block;
+    }
+
+/* Contact -----------------------------------------------------------------------------*/
+#contact {
+    height: 100vh;
+    width: 100vw;
+    background: url('../assets/maldives.jpg') no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+#contact::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    content: '';
+    background: rgba(0, 0, 0, .5);
+}
+
+.form_area {
+    position: absolute;
+    z-index: 3;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+}
+
+    .form_area h2 {
+        text-align: center;
+        margin-bottom: 60px;
+    }
+
+    form {
+        width: 100%;
+    }
+
+        .cp_iptxt {
+            position: relative;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+            .cp_iptxt input, .cp_iptxt textarea {
+                font-family: var(--fontFamily);
+                box-sizing: border-box;
+                width: 100%;
+                letter-spacing: 1px;
+                vertical-align: bottom;
+            }
+
+            input[type=number]::-webkit-inner-spin-button, 
+            input[type=number]::-webkit-outer-spin-button { 
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                margin: 0; 
+            }
+
+            .cp_iptxt input:focus {
+                outline: none;
+            }
+
+            .ipfield {
+                padding: 7px 14px;
+                transition: 0.4s;
+                border: 1px solid var(--brandColor);
+                background: transparent;
+            }
+
+            .cp_iptxt input, .cp_iptxt textarea {
+                padding-left: 5em;
+            }
+
+            .ipfield ~ .focus_line:before,
+            .ipfield ~ .focus_line:after {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 0;
+                height: 2px;
+                content: '';
+                transition: 0.3s;
+                background-color: #3cbada;
+            }
+
+            .ipfield ~ .focus_line:after {
+                top: auto;
+                right: 0;
+                bottom: 0;
+                left: auto;
+            }
+
+            .ipfield ~ .focus_line i:before,
+            .ipfield ~ .focus_line i:after {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 2px;
+                height: 0;
+                content: '';
+                transition: 0.4s;
+                background-color: #3cbada;
+            }
+
+            .ipfield ~ .focus_line i:after {
+                top: auto;
+                right: 0;
+                bottom: 0;
+                left: auto;
+
+            }
+            .ipfield:focus ~ .focus_line:before,
+            .ipfield:focus ~ .focus_line:after,
+            .cp_iptxt.ipfield ~ .focus_line:before,
+            .cp_iptxt.ipfield ~ .focus_line:after {
+                width: 100%;
+                transition: 0.3s;
+            }
+
+            .ipfield:focus ~ .focus_line i:before,
+            .ipfield:focus ~ .focus_line i:after,
+            .cp_iptxt.ipfield ~ .focus_line i:before,
+            .cp_iptxt.ipfield ~ .focus_line i:after {
+                height: 100%;
+                transition: 0.4s;
+            }
+            
+            .ipfield ~ label {
+                position: absolute;
+                z-index: -1;
+                top: 10px;
+                left: 14px;
+                width: 100%;
+                transition: 0.3s;
+                letter-spacing: 0.5px;
+                color: rgba(240, 240, 240, .6);
+            }
+            
+            .ipfield:focus ~ label,
+            .cp_iptxt.ipfield ~ label {
+                font-size: 14px;
+                top: -20px;
+                left: 0;
+                transition: 0.3s;
+                color: #3cbada;
+            }
+            
+
+/* Contact Preview */
+/* #contact_preview {
+    height: 100vh;
+    width: 100vw;
+    background: url('assets/maldives.jpg') no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+    
+#contact_preview::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    content: '';
+    background: rgba(0, 0, 0, .5);
+}
+
+    #contact_preview #fixed-header,
+    #result #fixed-header {
+        background: transparent;
+    }
+        
+        #contact_preview .btn-shine:first-of-type {
+            right: 155px;
+        }
+
+        .btn-shine a {
+            color: rgba(240, 240, 240, .6);
+            text-decoration: none;
+        } */
+
+/* Contact Result */
+/* #result {
+    height: 100vh;
+    width: 100vw;
+    background: url('assets/maldives.jpg') no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: var(--brandColor);
+}
+    
+#result::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    content: '';
+    background: rgba(0, 0, 0, .5);
+}
+
+.result_body {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.result_body .btn-shine {
+    margin-top: 20px;
+} */
